@@ -10,19 +10,19 @@ pgs = [ "Home" => "index.md",
        ]
 
 fmt = DocumenterVitepress.MarkdownVitepress(
-      repo = "https://github.com/Juliahealth/MedImages.jl",)
+      repo = "https://github.com/divital-coder/MedImages.jl",)
 
 
 makedocs(;
     modules=[MedImages],
-    repo=Remotes.GitHub("JuliaHealth", "MedImages.jl"),
+    repo=Remotes.GitHub("divital-coder", "MedImages.jl"),
     authors="Jakub-Mitura <jakubmitura14@gmail.com>, Divyansh-Goyal <divital2004@gmail.com>, Jan-Zubik and contributors",
     sitename="MedImages.jl",
     format=fmt,
     pages=pgs
    )    
 deploydocs(;
-    repo="github.com/JuliaHealth/MedImages.jl",
+    repo="github.com/divital-coder/MedImages.jl",
     target="build", # this is where Vitepress stores its output
     devbranch="main",
     branch="gh-pages",
