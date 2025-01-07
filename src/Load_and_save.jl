@@ -71,7 +71,7 @@ function load_images(path::String, modality::String)::Array{MedImage}
 
     voxel_arr = ITKIOWrapper.loadVoxelData(path,spatial_meta)
     voxel_arr = voxel_arr.dat
-    voxel_arr = permutedims(voxel_arr, (3, 2, 1))
+    voxel_arr = permutedims(voxel_arr, (1, 2, 3))
     spatial_metadata_keys = ["origin", "spacing", "direction"]
     spatial_metadata_values = [origin, spacing, direction]
     spatial_metadata = Dictionaries.Dictionary(spatial_metadata_keys, spatial_metadata_values)
@@ -88,7 +88,7 @@ function create_nii_from_medimage(med_image::MedImage, file_path::String)
   # Convert voxel_data to a numpy array (Assuming voxel_data is stored in Julia array format)
   voxel_data_np = med_image.voxel_data
   voxel_data_np = permutedims(voxel_data_np, (3, 2, 1))
-  # Create a SimpleITK image from numpy array
+   #Create a SimpleITK image from numpy array
   sitk = pyimport("SimpleITK")
   image_sitk = sitk.GetImageFromArray(voxel_data_np)
 
