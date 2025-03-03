@@ -163,11 +163,12 @@ function load_image(path::String, type::String)::MedImage
   spatial_meta = ITKIOWrapper.load_spatial_metadata(imaging_study)
   voxel_arr_struct = ITKIOWrapper.load_voxel_data(imaging_study, spatial_meta)
   voxel_arr = voxel_arr_struct.dat
-  # voxel_arr = permutedims(voxel_arr, (3, 2, 1))
+  #voxel_arr = permutedims(voxel_arr, (3, 2, 1))
+  study_type = type == "CT" ? MedImage_data_struct.CT_type : MedImage_data_struct.PET_type
   subtype = type == "CT" ? MedImage_data_struct.CT_subtype : MedImage_data_struct.FDG_subtype
   legacy_file_name_field = string(split(path, "/")[length(split(path, "/"))])
 
-  return MedImage(voxel_data=voxel_arr, origin=spatial_meta.origin, spacing=spatial_meta.spacing, direction=spatial_meta.direction, patient_id="test_id", image_type=type, image_subtype=subtype, legacy_file_name=legacy_file_name_field)
+  return MedImage(voxel_data=voxel_arr, origin=spatial_meta.origin, spacing=spatial_meta.spacing, direction=spatial_meta.direction, patient_id="test_id", image_type=study_type, image_subtype=subtype, legacy_file_name=legacy_file_name_field)
 end
 end
 
